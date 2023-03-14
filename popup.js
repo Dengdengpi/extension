@@ -1,8 +1,12 @@
 
 document.getElementById('generate-suggestions').addEventListener('click', async () => {
     // Get the user's input from the textareas
-    const resume = document.getElementById('resume').value.trim();
+    let resume = document.getElementById('resume').value.trim();
     const jobRequirements = document.getElementById('job-requirements').value.trim();
+    const savedResume = localStorage.getItem("savedResume");
+    if (savedResume && !resume) {
+        resume = savedResume
+    }
 
     // Check if either field is empty
     if (!resume || !jobRequirements) {
@@ -12,10 +16,10 @@ document.getElementById('generate-suggestions').addEventListener('click', async 
   
     // Extract the job requirements from the current tab's webpage
     // const jobRequirementsFromPage = await extractJobRequirements();
-    jobRequirementsFromPage = ''
-    
+
+    localStorage.setItem("savedResume", resume);
     // Generate suggestions using OpenAI's API
-    const suggestions = await updateSuggestions(resume, jobRequirementsFromPage || jobRequirements);
+    const suggestions = await updateSuggestions(resume,  jobRequirements);
   
   });
   
@@ -24,7 +28,7 @@ document.getElementById('generate-suggestions').addEventListener('click', async 
   
   
   async function updateSuggestions(resumeText, jobRequirements) {
-    const openaiApiKey = "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";
+    const openaiApiKey = "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";
     const prompt = `Here are some suggestions for improving your resume based on the job requirements:\n\nResume text:\n${resumeText}\n\nJob requirements:\n${jobRequirements}\n\nSuggestions:`;
   
     const model = "text-davinci-002";
