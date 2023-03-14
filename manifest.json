@@ -1,0 +1,15 @@
+{
+  "name": "Resume Suggestions",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Generate personalized suggestions for improving your resume based on job requirements.",
+  
+  "permissions": [
+    "tabs",
+    "activeTab"
+ 
+],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
